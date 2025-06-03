@@ -1,0 +1,88 @@
+data1 = {
+    "Name": "Alice",
+    "Age": 30,
+    "City": "New York",
+}
+
+data2 = [
+    {"Name": "Bob", "Age": 25, "City": "London", "Job": "Engineer"},
+    {"Name": "Charlie", "Age": 35, "City": "Paris", "Job": "Artist"},
+    {"Name": "David", "Age": 28, "City": "Tokyo"},
+]
+
+# Example 1: Single dictionary
+print("Single Dictionary Table:")
+if data1:
+    headers = list(data1.keys())
+    column_widths = {header: len(str(header)) for header in headers}
+    for value in data1.values():
+        for header, value2 in data1.items():
+            column_widths[header] = max(column_widths[header], len(str(value2)))
+
+    header_row = "|"
+    for header in headers:
+        header_row += f" {header:<{column_widths[header]}} |"
+    print("-" * len(header_row))
+    print(header_row)
+    print("-" * len(header_row))
+
+    data_row = "|"
+    for header in headers:
+        data_row += f" {str(data1[header]):<{column_widths[header]}} |"
+    print(data_row)
+    print("-" * len(header_row))
+else:
+    print("Empty dictionary.")
+
+# Example 2: List of dictionaries
+print("\nList of Dictionaries Table:")
+if data2:
+    headers = list(data2[0].keys())
+    column_widths = {header: len(str(header)) for header in headers}
+    for row in data2:
+        for header, value in row.items():
+            column_widths[header] = max(column_widths[header], len(str(value)))
+
+    header_row = "|"
+    for header in headers:
+        header_row += f" {header:<{column_widths[header]}} |"
+    print("-" * len(header_row))
+    print(header_row)
+    print("-" * len(header_row))
+
+    for row in data2:
+        data_row = "|"
+        for header in headers:
+            value = row.get(header, "")
+            data_row += f" {str(value):<{column_widths[header]}} |"
+        print(data_row)
+    print("-" * len(header_row))
+else:
+    print("Empty list of dictionaries.")
+
+print("\nList of Dictionaries with Custom Headers:")
+custom_headers = ["Name", "Age", "Job"]
+if data2:
+
+    column_widths = {header: len(str(header)) for header in custom_headers}
+    for row in data2:
+        for header in custom_headers:
+          if header in row:
+            column_widths[header] = max(column_widths[header], len(str(row.get(header,""))))
+
+    header_row = "|"
+    for header in custom_headers:
+        header_row += f" {header:<{column_widths[header]}} |"
+    print("-" * len(header_row))
+    print(header_row)
+    print("-" * len(header_row))
+
+    for row in data2:
+        data_row = "|"
+        for header in custom_headers:
+            value = row.get(header, "")
+            data_row += f" {str(value):<{column_widths[header]}} |"
+        print(data_row)
+    print("-" * len(header_row))
+else:
+    print("Empty list of dictionaries.")
